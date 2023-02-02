@@ -39,6 +39,19 @@ impl Default for Person {
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        let list: Vec<&str> = s.split(',').collect();
+        if list.len() < 2 {
+           Person::default()
+        } else {
+          if let Ok(age) = list[1].parse::<usize>() {
+           Person{
+                name: list[0].to_string(),
+                age: age
+           }
+          } else {
+            Person::default()
+          }
+        }
     }
 }
 
